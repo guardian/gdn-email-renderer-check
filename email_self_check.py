@@ -13,7 +13,7 @@ if not home_page_request.status_code == 200:
 
 front_page_soup = BeautifulSoup(home_page_request.text)
 
-urls = [url + a['href'] for a in front_page_soup.find_all('a') if a['href'].startswith('/')]
+urls = {url + a['href'] for a in front_page_soup.find_all('a') if a['href'].startswith('/')}
 
 failed_urls = []
 
@@ -24,7 +24,7 @@ with futures.ThreadPoolExecutor(max_workers=3) as executor:
 		r = read.result()
 
 		if not r.status_code == 200:
-			failed_urls.append(url)
+			failed_urls.append(r.url)
 
 if not failed_urls:
 	print 'All urls okay'
