@@ -1,6 +1,5 @@
-
 import requests
-import futures
+from concurrent.futures import *
 from bs4 import BeautifulSoup
 
 url = 'http://gu-email-renderer.appspot.com'
@@ -17,7 +16,7 @@ urls = {url + a['href'] for a in front_page_soup.find_all('a') if a['href'].star
 
 failed_urls = []
 
-with futures.ThreadPoolExecutor(max_workers=3) as executor:
+with ThreadPoolExecutor(max_workers=3) as executor:
 	url_reads = [executor.submit(lambda url: requests.get(url), url) for url in urls]
 
 	for read in url_reads:
