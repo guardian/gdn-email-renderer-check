@@ -1,6 +1,5 @@
-
 import requests
-import futures
+import concurrent.futures as futures
 from bs4 import BeautifulSoup
 
 url = 'http://gu-email-renderer.appspot.com'

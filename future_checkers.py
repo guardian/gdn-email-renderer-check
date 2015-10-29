@@ -1,6 +1,5 @@
-
 import requests
-import futures
+import concurrent.futures as futures
 
 urls = [
 	'http://gu-email-renderer.appspot.com/daily-email-us/v6',
