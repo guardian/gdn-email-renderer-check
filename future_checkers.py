@@ -1,6 +1,5 @@
-
 import requests
-from concurrent.futures import *
+import concurrent.futures as futures
 
 urls = [
 	'http://gu-email-renderer.appspot.com/daily-email-us/v6',
@@ -14,7 +13,7 @@ urls = [
 
 failed_urls = []
 
-with ThreadPoolExecutor(max_workers=3) as executor:
+with futures.ThreadPoolExecutor(max_workers=3) as executor:
 	url_reads = [executor.submit(lambda url: requests.get(url), url) for url in urls]
 
 	for read in url_reads:
